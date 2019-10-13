@@ -1,0 +1,25 @@
+{
+  "name": "frontend-primer",
+  "version": "1.0.0",
+  "description": "General Front end Advice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mdx-deck build deck.mdx",
+    "start": "mdx-deck deck.mdx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davixyz/frontend-primer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davixyz/frontend-primer/issues"
+  },
+  "homepage": "https://github.com/davixyz/frontend-primer#readme",
+  "devDependencies": {
+    "mdx-deck": "^3.0.13"
+  }
+}
