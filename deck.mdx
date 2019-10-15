@@ -1,15 +1,102 @@
-# This is the title of my deck
+import { themes } from 'mdx-deck'
+export const theme = themes.dark
+
+import flex from './images/flex.png'
+
+
+# Frontend Primer
+
+Opinionated frontend advice (and git)
+
+by [Carlos Castro](https://github.com/davixyz)
 
 ---
 
-# About Me
+# What this presentation is not about
+
+- Basics
+- Tutorials
+- Corgis
 
 ---
 
-```jsx
-<CodeSnippet />
+# What this presentation is about
+
+- some git good practices
+- some css good practices
+- some accesibility call outs
+- some react good practices
+
+---
+
+# Git
+
+---
+
+# Conventional Commits
+
+- Easier parsing and reading a commit history
+- Deterministic releases
+- Automatic Changelog
+- Pride
+
+---
+
+# Conventional Commits Spec
+
+https://www.conventionalcommits.org/en/v1.0.0/
+
+---
+
+# Conventional Commits Spec
+
+https://www.conventionalcommits.org/en/v1.0.0/
+
+---
+# Commitizen
+
+Simple commit conventions for internet citizens.
+
+---
+
+# What is Commitizen
+
+Command line utility that prompts you for options to format your commits
+
+---
+
+# How to install and Demo
+
+[Setup](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility)
+
+---
+
+# CSS
+---
+# Use Flex for Layout
+
+<img src={flex} alt="flex browser support" style={{ height: 500 }}/>
+
+---
+
+# Use REMS for most of things
+```css
+    .btn {
+        font-size: 16px;
+    }
+```
+```css
+    .btn {
+        font-size: 1rem;
+    }
 ```
 
 ---
 
-# The end
+# Wait, what about EMs?
+
+You can still use them when size is dependant on parent
+font size. 
+
+E.g Icons
+
