@@ -1,7 +1,11 @@
-import { themes } from 'mdx-deck'
-export const theme = themes.dark
+
+import myTheme from './theme'
+
+export const theme = myTheme
 
 import flex from './images/flex.png'
+import corgi from './images/corgi.png'
+import fontSupport from './images/font-support.png'
 
 
 # Frontend Primer
@@ -18,13 +22,15 @@ by [Carlos Castro](https://github.com/davixyz)
 - Tutorials
 - Corgis
 
+<img src={corgi} alt="prohibited corgi" style={{ height: 200 }}/>
+
 ---
 
 # What this presentation is about
 
 - some git good practices
 - some css good practices
-- some accesibility call outs
+- some accessibility call outs
 - some react good practices
 
 ---
@@ -53,21 +59,29 @@ https://www.conventionalcommits.org/en/v1.0.0/
 https://www.conventionalcommits.org/en/v1.0.0/
 
 ---
+
 # Commitizen
 
-Simple commit conventions for internet citizens.
+- Command line utility that prompts you for options to format your commits
+- It works with conventional commits spec!
 
 ---
 
-# What is Commitizen
+# How to install
 
-Command line utility that prompts you for options to format your commits
+```sh
+npm install -g commitizen
+
+npm install -g cz-conventional-changelog
+
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+```
 
 ---
 
-# How to install and Demo
+# Demo
 
-[Setup](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility)
+https://github.com/davixyz/ccc
 
 ---
 
@@ -96,7 +110,327 @@ Command line utility that prompts you for options to format your commits
 # Wait, what about EMs?
 
 You can still use them when size is dependant on parent
-font size. 
+font size.
 
 E.g Icons
+
+---
+
+# Use Stylelint
+
+- Like ESLint but for CSS
+- Prevents most common mistakes
+- When not in use: Adhere to the project standards... but at least sort the css properties*
+
+---
+
+# Decide on a naming convention
+
+BEM, OOCSS, smacss, amcss, etc
+
+---
+
+# I like BEM
+
+so we are going to quickly see BEM
+
+---
+
+# Block
+
+```
+.human {
+    // properties
+}
+```
+---
+# Element(s)
+
+```
+.human__head {}
+```
+---
+# Modifier(s)
+```
+.human--tall {}
+```
+---
+
+# All together
+```
+.human {}
+.human__head {}
+.human--tall {}
+```
+---
+# Do not nest more than 1 level
+```
+// bad
+.human__head__eyes {}
+// good
+.human__eyes
+```
+---
+# Don't use !important
+unless you are dealing with 3rd party libraries or developing within a 3rd party
+
+---
+
+# WOFF2 > All other formats
+<img src={fontSupport} alt="font support" style={{ height: 200 }}/>
+
+---
+
+# A11Y
+Accessibility
+
+---
+
+# alt Text
+use 'alt' for images, provide text backing up icons, describe each control
+
+---
+
+# Semantic Elements
+
+- Break up content with subheadings for new sections.
+- Mark those headings with HTML header tags.
+- Use the correct HTML for all structural elements.
+- Use valid HTML everywhere else.
+- Use clear labels on forms.
+
+---
+
+# Color
+
+- Do not rely just on color to convey information
+- Provide enough contrast on text color
+
+
+---
+
+# Keyboard navigation
+
+- Use focusable elements
+- Try not to write custom elements that resemble native elements (E.g Select)
+
+---
+
+# Test with screen reader
+
+Mac Voice control is a good start
+
+---
+
+# React (quick overview)
+
+A JavaScript library for building user interfaces
+
+---
+
+# JSX
+
+```
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
+```
+
+---
+
+# Components and props
+
+```
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+<Welcome name="billing" />
+```
+
+---
+
+# State
+
+```
+class Welcome extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = { name: 'foo'}
+      this.onClick = this.onClick.bind(this);
+  }
+  onClick() {
+   this.setState({ name: 'bar' })
+  }
+  render() {
+    return (
+        <div>
+            <h1>Hello, {this.state.name}</h1>;
+            <button onClick={this.onClick}>change</button>
+        </div>
+    );
+  }
+}
+```
+---
+
+# State with Hooks (New)
+
+```
+const Welcome = (props) {
+    const [name, setName] = useState('foo');
+    return (
+        <div>
+            <h1>Hello, {name}</h1>;
+            <button onClick={() => { setName('bar')}}>change</button>
+        </div>
+    );
+}
+```
+
+---
+
+# Mounting - Lifecycle Events
+
+- constructor()
+- getDerivedStateFromProps()
+- render()
+- componentDidMount()
+
+---
+
+# Updating - Lifecycle Events
+
+- getDerivedStateFromProps()
+- shouldComponentUpdate()
+- render()
+- getSnapshotBeforeUpdate()
+- componentDidUpdate()
+
+---
+
+# Unmounting - Lifecycle Events
+
+- componentWillUnmount()
+
+---
+
+# Error Handling - Lifecycle Events
+
+- getDerivedStateFromError()
+- componentDidCatch()
+
+---
+
+# Error Handling - Lifecycle Events
+
+- getDerivedStateFromError()
+- componentDidCatch()
+
+---
+
+# Advanced APIs
+
+---
+
+# Context
+```
+const MyContext = React.createContext(defaultValue);
+<MyContext.Provider value={/* some value */}>
+<MyContext.Consumer>
+  {value => /* render something based on the context value */}
+</MyContext.Consumer>
+```
+
+---
+
+# Context with hooks
+```
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+
+const ThemeContext = React.createContext(themes.light);
+// Provider is the same way as before
+// Consumer changes to this new way
+const theme = useContext(ThemeContext);
+```
+
+---
+
+# Fragments
+```
+<React.Fragment>
+    <ChildA />
+    <ChildB />
+    <ChildC />
+</React.Fragment>
+
+// Short syntax
+<>
+    <ChildA />
+    <ChildB />
+    <ChildC />
+</>
+```
+
+---
+
+# Higher Order Components
+```
+function logProps(WrappedComponent) {
+  return class extends React.Component {
+    componentWillReceiveProps(nextProps) {
+      console.log('Current props: ', this.props);
+      console.log('Next props: ', nextProps);
+    }
+    render() {
+      // Wraps the input component in a container, without mutating it. Good!
+      return <WrappedComponent {...this.props} />;
+    }
+  }
+}
+```
+
+---
+
+# Portals
+```
+function logProps(WrappedComponent) {
+  return class extends React.Component {
+    componentWillReceiveProps(nextProps) {
+      console.log('Current props: ', this.props);
+      console.log('Next props: ', nextProps);
+    }
+    render() {
+      // Wraps the input component in a container, without mutating it. Good!
+      return <WrappedComponent {...this.props} />;
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
 
