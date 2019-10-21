@@ -391,6 +391,38 @@ const theme = useContext(ThemeContext);
 
 ---
 
+# Portals
+```
+const Modal = props => {
+  return ReactDOM.createPortal(props.children, document.body);
+};
+
+```
+
+---
+
+# Proptypes
+```
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+
+```
+
+---
+
+# Advanced React Patterns
+
+---
+
 # Higher Order Components
 ```
 function logProps(WrappedComponent) {
@@ -409,21 +441,41 @@ function logProps(WrappedComponent) {
 
 ---
 
-# Portals
+# Render Props
 ```
-function logProps(WrappedComponent) {
-  return class extends React.Component {
-    componentWillReceiveProps(nextProps) {
-      console.log('Current props: ', this.props);
-      console.log('Next props: ', nextProps);
-    }
-    render() {
-      // Wraps the input component in a container, without mutating it. Good!
-      return <WrappedComponent {...this.props} />;
-    }
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { on: false};
+  }
+  handleToggle() {
+      this.setState({
+          on: !this.state.on
+      });
+  }
+  render() {
+    return this.props.render(this.state);
   }
 }
 ```
+
+---
+
+# Container Components
+
+- Are concerned with how things work.
+- Provide the data and behavior to presentational or other container components.
+- Are often stateful, as they tend to serve as data sources.
+
+---
+
+# Presentational Components
+
+- Are concerned with how things look.
+- May contain both presentational and container components inside
+- Have no dependencies on the rest of the app, such as Flux actions or stores.
+
+
 
 
 
